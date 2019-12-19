@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.service.dao.realdata.SRealDataDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.service.entity.realdata.SRealDataEntity" id="sRealDataMap">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="jobName" column="job_name"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="stopTime" column="stop_time"/>
+        <result property="cpc" column="cpc"/>
+        <result property="cpm" column="cpm"/>
+        <result property="consumeMoney" column="consume_money"/>
+        <result property="clicks" column="clicks"/>
+        <result property="clicksRate" column="clicks_rate"/>
+        <result property="exposures" column="exposures"/>
+        <result property="arrives" column="arrives"/>
+        <result property="arrivesRate" column="arrives_rate"/>
+        <result property="oneUpdateClicks" column="one_update_clicks"/>
+        <result property="oneUpdateExposures" column="one_update_exposures"/>
+        <result property="oneUpdateConsumeMoney" column="one_update_consume_money"/>
+        <result property="oneUpdateArrives" column="one_update_arrives"/>
+        <result property="createYear" column="create_year"/>
+        <result property="createMonth" column="create_month"/>
+        <result property="createDay" column="create_day"/>
+        <result property="createId" column="create_id"/>
+        <result property="createName" column="create_name"/>
+        <result property="delFlag" column="del_flag"/>
+    </resultMap>
+    <select id="summary" resultType="java.util.HashMap">
+            select ifnull(sum(clicks),0) as clicks,ifnull(sum(exposures),0) as exposures from s_real_data where user_id = #{userId}
+    </select>
+    <select id="getClickAndExAndArriveByDay"
+            resultType="io.renren.modules.service.entity.realdata.InitCharLineRModule">
+
+        select user_id,sum(clicks) clicks,sum(exposures) exposures,sum(arrives) arrives,create_year,create_month
+        <if test="sday != null and eday != null">
+        ,create_day
+        </if>
+        from s_real_data
+        group by create_year,create_month,create_day,user_id having user_id = #{userId}
+        <if test="sday != null and eday != null">
+            and create_day <![CDATA[ >= ]]> #{sday} and create_day <![CDATA[ <= ]]>  #{eday}
+        </if>
+        and create_month <![CDATA[ >= ]]> #{smonth} and create_month <![CDATA[ <= ]]>  #{emonth}
+        and create_year <![CDATA[ >= ]]> #{syear} and create_year <![CDATA[ <= ]]>  #{eyear}
+    </select>
+
+
+</mapper>

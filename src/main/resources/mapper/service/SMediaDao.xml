@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.service.dao.meida.SMediaDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.service.entity.media.SMediaEntity" id="sMediaMap">
+        <result property="id" column="id"/>
+        <result property="clientType" column="client_type"/>
+        <result property="advertisingPlatform" column="advertising_platform"/>
+        <result property="mediaType" column="media_type"/>
+        <result property="mediaName" column="media_name"/>
+        <result property="advertisingSpace" column="advertising_space"/>
+        <result property="advertisingSize" column="advertising_size"/>
+        <result property="sizeRequirement" column="size_requirement"/>
+        <result property="trafficType" column="traffic_type"/>
+        <result property="advertisingSpaceType" column="advertising_space_type"/>
+        <result property="volumeOfExhibition" column="volume_of_exhibition"/>
+        <result property="redirectType" column="redirect_type"/>
+        <result property="url" column="url"/>
+        <result property="isComment" column="is_comment"/>
+        <result property="createYear" column="create_year"/>
+        <result property="createMonth" column="create_month"/>
+        <result property="createDay" column="create_day"/>
+        <result property="createId" column="create_id"/>
+        <result property="createName" column="create_name"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+
+</mapper>

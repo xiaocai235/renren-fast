@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.sys.dao.SysDictItemDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.sys.entity.SysDictItemEntity" id="sysDictItemMap">
+        <result property="id" column="id"/>
+        <result property="dictId" column="dict_id"/>
+        <result property="dictItemKey" column="dict_item_key"/>
+        <result property="dictItemValue" column="dict_item_value"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+    <select id="getDictItemListByDictName" resultType="io.renren.modules.sys.entity.SysDictItemEntity">
+        select sys_dict_item.* from sys_dict join sys_dict_item on sys_dict.id = sys_dict_item.dict_id and
+            sys_dict.dict_value = #{dictName}
+    </select>
+
+
+</mapper>
